@@ -16,4 +16,7 @@ jobs:
           before_script: |
             sudo chown -R coq:coq .
           script: |
-            make -j4 check
+            make -j$(nproc) check
+      - name: Revert permissions
+        # to avoid a warning at cleanup time
+        run: sudo chown -R 1001:116 .
