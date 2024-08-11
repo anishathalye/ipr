@@ -44,11 +44,10 @@ Section LOCKSTEP.
     (forall i2, decode_input (encode_input i2) = Some i2) ->
     (forall o2, decode_output (encode_output (Some o2)) = o2) ->
     R M1.(init) M2.(init) ->
-    (forall s1 s2 i1 oi2 o1 s1',
+    (forall s1 s2 i1 o1 s1',
         R s1 s2 ->
-        decode_input i1 = oi2 ->
         M1.(step) s1 i1 (Result o1 s1') ->
-        match oi2 with
+        match decode_input i1 with
         | Some i2 => exists o2 s2',
             M2.(step) s2 i2 (Result o2 s2') /\
               R s1' s2' /\
@@ -87,9 +86,11 @@ Section LOCKSTEP.
       + (* high-level state, high-level input *)
         unfold lockstep_driver in *.
         rinv_dexec_head.
-        specialize (Hlockstep s1 s2 (encode_input i2) (Some i2) v s' HR).
+        specialize (Hlockstep s1 s2 (encode_input i2) v s' HR).
         inversion H3; clear H3; subst.
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep ltac:(auto)).
+        assert (decode_input (encode_input i2) = Some i2)  as Hoi2 by auto.
+        rewrite Hoi2 in Hlockstep.
         destruct Hlockstep as (o2 & s2' & Hstep & HR' & Hout).
         exists (EmulatorHigh s2').
         split; [ | unfold lifted_lockstep_R; intuition ].
@@ -101,9 +102,9 @@ Section LOCKSTEP.
         assumption.
       + (* high-level state, low-level input *)
         (* could correspond to a low-level input or a high-level input, we don't know *)
-        specialize (Hlockstep s1 s2 i1 (decode_input i1) ol s' HR).
+        specialize (Hlockstep s1 s2 i1 ol s' HR).
         inversion H2; clear H2; subst.
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep ltac:(auto)).
         destruct (decode_input i1) as [i2 | ] eqn:Hdecode1.
         * (* does correspond to a high-level input *)
           destruct Hlockstep as (o2 & s2' & Hstep & HR' & Hout).
@@ -132,9 +133,11 @@ Section LOCKSTEP.
         simpl in H3; rewrite Hnr1 in H3; subst.
         unfold lockstep_driver in *.
         rinv_dexec_head.
-        specialize (Hlockstep s' s2 (encode_input i2) (Some i2) v s'' HR).
+        specialize (Hlockstep s' s2 (encode_input i2) v s'' HR).
         inversion H3; clear H3; subst.
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep ltac:(auto)).
+        assert (decode_input (encode_input i2) = Some i2)  as Hoi2 by auto.
+        rewrite Hoi2 in Hlockstep.
         destruct Hlockstep as (o2 & s2' & Hstep & HR' & Hout).
         exists (EmulatorHigh s2').
         split; [ | unfold lifted_lockstep_R; intuition ].
@@ -145,9 +148,9 @@ Section LOCKSTEP.
         rewrite H.
         assumption.
       + (* low-level state, low-level input *)
-        specialize (Hlockstep s1 s2 i1 (decode_input i1) ol s' HR).
+        specialize (Hlockstep s1 s2 i1 ol s' HR).
         inversion H2; clear H2; subst.
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep ltac:(auto)).
         destruct (decode_input i1) as [i2 | ] eqn:Hdecode1.
         * (* does correspond to a high-level input *)
           destruct Hlockstep as (o2 & s2' & Hstep & HR' & Hout).
@@ -198,8 +201,10 @@ Section LOCKSTEP.
       + (* high-level state, high-level input *)
         destruct (Htot1 s1 (encode_input i2)) as [[o1' s1'] Hsi1].
         exists (DriverHigh s1').
-        specialize (Hlockstep s1 s2 (encode_input i2) (Some i2) o1' s1' HR).
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep s1 s2 (encode_input i2) o1' s1' HR).
+        specialize (Hlockstep ltac:(auto)).
+        assert (decode_input (encode_input i2) = Some i2)  as Hoi2 by auto.
+        rewrite Hoi2 in Hlockstep.
         destruct Hlockstep as (o2' & s2' & Hstep2 & HR' & Hout).
         inversion H2; clear H2; subst.
         specialize (Hdet2 _ _ _ _ H3 Hstep2).
@@ -217,7 +222,7 @@ Section LOCKSTEP.
         (* could correspond to a low-level input or a high-level input, we don't know *)
         destruct (Htot1 s1 i1) as [[o1' s1'] Hsi1].
         exists (DriverLow s1').
-        specialize (Hlockstep s1 s2 i1 (decode_input i1) o1' s1' HR ltac:(auto) Hsi1).
+        specialize (Hlockstep s1 s2 i1 o1' s1' HR Hsi1).
         simpl in H2.
         destruct (decode_input i1) as [i2 | ] eqn:Hdecode1.
         * (* does correspond to a high-level input *)
@@ -246,8 +251,10 @@ Section LOCKSTEP.
         simpl in H3; rewrite Hnr2 in H3; subst.
         destruct (Htot1 s1 (encode_input i2)) as [[o1' s1'] Hsi1].
         exists (DriverHigh s1').
-        specialize (Hlockstep s1 ms' (encode_input i2) (Some i2) o1' s1' HR).
-        specialize (Hlockstep ltac:(auto) ltac:(auto)).
+        specialize (Hlockstep s1 ms' (encode_input i2) o1' s1' HR).
+        specialize (Hlockstep ltac:(auto)).
+        assert (decode_input (encode_input i2) = Some i2)  as Hoi2 by auto.
+        rewrite Hoi2 in Hlockstep.
         destruct Hlockstep as (o2' & s2' & Hstep2 & HR' & Hout).
         inversion H5; clear H5; subst.
         specialize (Hdet2 _ _ _ _ H2 Hstep2).
@@ -265,7 +272,7 @@ Section LOCKSTEP.
       + (* low-level state, low-level input *)
         destruct (Htot1 s1 i1) as [[o1' s1'] Hsi1].
         exists (DriverLow s1').
-        specialize (Hlockstep s1 s2 i1 (decode_input i1) o1' s1' HR ltac:(auto) Hsi1).
+        specialize (Hlockstep s1 s2 i1 o1' s1' HR Hsi1).
         simpl in H0.
         destruct (decode_input i1) as [i2 | ] eqn:Hdecode1.
         * (* does correspond to a high-level input *)
