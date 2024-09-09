@@ -62,7 +62,7 @@ Inductive eexec {S Il Ir Ol Or : Type} (M : machine (Il + Ir) (Ol + Or)) :
 Arguments eexec [S Il Ir Ol Or].
 
 Create HintDb emulator.
-Hint Constructors eexec : emulator.
+#[export] Hint Constructors eexec : emulator.
 
 Ltac rinv_eexec_head :=
   repeat lazymatch goal with

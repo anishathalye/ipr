@@ -36,8 +36,8 @@ Arguments mux [I O].
 
 Create HintDb ipr.
 
-Hint Constructors mux_step : ipr.
-Hint Unfold mux : ipr.
+#[export] Hint Constructors mux_step : ipr.
+#[export] Hint Unfold mux : ipr.
 
 Section DRIVER.
 
@@ -102,10 +102,10 @@ Arguments add_driver [Ir Or I1 O1 I2 O2].
 Definition real_world {I1 O1 I2 O2 : Type} (M1 : machine I1 O1) (d : driver I1 O1 I2 O2) : machine (I2 + I1) (O2 + O1) :=
   add_driver (mux M1) d.
 
-Hint Constructors driver_state : ipr.
-Hint Constructors driver_step : ipr.
-Hint Unfold add_driver : ipr.
-Hint Unfold real_world : ipr.
+#[export] Hint Constructors driver_state : ipr.
+#[export] Hint Constructors driver_step : ipr.
+#[export] Hint Unfold add_driver : ipr.
+#[export] Hint Unfold real_world : ipr.
 
 Section EMULATOR.
 
@@ -171,10 +171,10 @@ Arguments add_emulator [Il Ol I1 O1 I2 O2].
 Definition ideal_world {I1 O1 I2 O2 : Type} (M2 : machine I2 O2) (e : emulator I2 O2 I1 O1) : machine (I2 + I1) (O2 + O1) :=
   add_emulator (mux M2) e.
 
-Hint Constructors emulator_state : ipr.
-Hint Constructors emulator_step : ipr.
-Hint Unfold add_emulator : ipr.
-Hint Unfold ideal_world : ipr.
+#[export] Hint Constructors emulator_state : ipr.
+#[export] Hint Constructors emulator_step : ipr.
+#[export] Hint Unfold add_emulator : ipr.
+#[export] Hint Unfold ideal_world : ipr.
 
 Definition IPR {I1 O1 I2 O2} (M1 : machine I1 O1) (M2 : machine I2 O2) (d : driver I1 O1 I2 O2) : Prop :=
   exists (e : emulator I2 O2 I1 O1),

@@ -51,7 +51,7 @@ Inductive execution {I O : Type} (M : machine I O) : M.(state) -> trace I O -> M
     execution _ s' tr s'' ->
     execution _ s (Reset :: tr) s''.
 
-Hint Constructors execution : machine.
+#[export] Hint Constructors execution : machine.
 
 Inductive execution_r {I O : Type} (M : machine I O) : M.(state) -> trace I O -> M.(state) -> Prop :=
 | ExecutionREmpty : forall s, execution_r _ s nil s
@@ -64,12 +64,12 @@ Inductive execution_r {I O : Type} (M : machine I O) : M.(state) -> trace I O ->
     M.(reset) s' s'' ->
     execution_r _ s (tr ++ Reset :: nil) s''.
 
-Hint Constructors execution_r : machine.
+#[export] Hint Constructors execution_r : machine.
 
 Definition in_traces {I O : Type} (M : machine I O) (tr : trace I O) : Prop :=
   exists sf, execution M M.(init) tr sf.
 
-Hint Unfold in_traces : machine.
+#[export] Hint Unfold in_traces : machine.
 
 (* M1 <= M2, any sequence of outputs that can be produced by M1 can also be produced by M2 *)
 Definition refines {I O : Type} (M1 M2 : machine I O) : Prop :=
@@ -77,7 +77,7 @@ Definition refines {I O : Type} (M1 M2 : machine I O) : Prop :=
     in_traces M1 tr ->
     in_traces M2 tr.
 
-Hint Unfold refines : machine.
+#[export] Hint Unfold refines : machine.
 
 Lemma refines_refl :
   forall I O (M : machine I O),
@@ -99,7 +99,7 @@ Qed.
 Definition equivalent {I O : Type} (M1 M2 : machine I O) : Prop :=
   refines M1 M2 /\ refines M2 M1.
 
-Hint Unfold equivalent : machine.
+#[export] Hint Unfold equivalent : machine.
 
 Lemma equivalent_refl :
   forall I O (M : machine I O),
@@ -178,7 +178,7 @@ Proof.
   induction 1; subst; simpl; intros; eauto with machine.
 Qed.
 
-Hint Resolve execution_join : machine.
+#[export] Hint Resolve execution_join : machine.
 
 Lemma execution_cons :
   forall I O (M : machine I O) s0 s1 s2 tr1 tr2,
@@ -191,7 +191,7 @@ Proof.
   eapply execution_join; eauto.
 Qed.
 
-Hint Resolve execution_cons : machine.
+#[export] Hint Resolve execution_cons : machine.
 
 Lemma execution_consume :
   forall I O (M : machine I O) s0 s2 evt tr,
@@ -205,7 +205,7 @@ Proof.
     eauto with machine.
 Qed.
 
-Hint Resolve execution_consume : machine.
+#[export] Hint Resolve execution_consume : machine.
 
 Lemma execution_split :
   forall I O (M : machine I O) s0 s2 tr1 tr2,
@@ -225,7 +225,7 @@ Proof.
   inversion IHio1; eexists; intuition; eauto with machine.
 Qed.
 
-Hint Resolve execution_split : machine.
+#[export] Hint Resolve execution_split : machine.
 
 Lemma execution_r_execution :
   forall I O (M : machine I O) s io s',
@@ -236,7 +236,7 @@ Proof.
   induction H; eauto with machine.
 Qed.
 
-Hint Resolve execution_r_execution : machine.
+#[export] Hint Resolve execution_r_execution : machine.
 
 Lemma execution_r_join :
   forall I O (M : machine I O) s0 s1 s2 tr1 tr2,
@@ -275,7 +275,7 @@ Proof.
         eauto with machine.
 Qed.
 
-Hint Resolve execution_r_join : machine.
+#[export] Hint Resolve execution_r_join : machine.
 
 Lemma execution_execution_r :
   forall I O (M : machine I O) s tr s',
@@ -294,7 +294,7 @@ Proof.
     eauto with machine.
 Qed.
 
-Hint Resolve execution_execution_r : machine.
+#[export] Hint Resolve execution_execution_r : machine.
 
 Theorem refines_forward_simulation :
   forall (I O : Type) (M1 M2 : machine I O),

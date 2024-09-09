@@ -62,7 +62,7 @@ Inductive dexec {Il Ir Ol Or : Type} (M : machine (Il + Ir) (Ol + Or)) :
 Arguments dexec [Il Ir Ol Or].
 
 Create HintDb driver.
-Hint Constructors dexec : driver.
+#[export] Hint Constructors dexec : driver.
 
 Ltac rinv_dexec_head :=
   repeat lazymatch goal with
