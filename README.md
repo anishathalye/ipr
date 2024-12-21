@@ -35,17 +35,47 @@ You can run `make` to check the proofs.
 
 ## Citation
 
-Knox (OSDI'22) introduces the definition of information-preserving refinement:
+Knox (OSDI'22) introduces the definition of information-preserving refinement (IPR):
 
 ```bibtex
 @inproceedings{knox:osdi22,
-    author =    {Anish Athalye and M. Frans Kaashoek and Nickolai Zeldovich},
-    title =     {Verifying Hardware Security Modules with Information-Preserving Refinement},
-    month =     {jul},
-    year =      {2022},
-    booktitle = {Proceedings of the 16th USENIX Symposium on Operating Systems Design and Implementation~(OSDI)},
-    address =   {Carlsbad, CA},
+  author        = {Anish Athalye and M. Frans Kaashoek and Nickolai Zeldovich},
+  title         = {Verifying Hardware Security Modules with
+                  Information-Preserving Refinement},
+  year          = 2022,
+  month         = jul,
+  booktitle     = {Proceedings of the 16th USENIX Symposium on Operating
+                  Systems Design and Implementation~(OSDI 2022)},
+  address       = {Carlsbad, CA},
 }
 ```
 
-This formalization was developed as part of a follow-up paper that is under submission. This formalization is also a part of Anish's PhD thesis. To get a copy of these pre-publication documents, email Anish at [aathalye@mit.edu](mailto:aathalye@mit.edu).
+Parfait (SOSP'24) formalizes IPR:
+
+```bibtex
+@inproceedings{parfait:sosp24,
+  author        = {Anish Athalye and Henry Corrigan-Gibbs and Frans Kaashoek
+                  and Joseph Tassarotti and Nickolai Zeldovich},
+  title         = {Modular Verification of Secure and Leakage-Free Systems:
+                  From Application Specification to Circuit-Level
+                  Implementation},
+  year          = 2024,
+  month         = nov,
+  booktitle     = {Proceedings of the 30th ACM Symposium on Operating Systems
+                  Principles~(SOSP 2024)},
+  address       = {Austin, TX},
+}
+```
+
+Chapter 4 of [Anish's PhD thesis](https://pdos.csail.mit.edu/papers/aathalye-thesis.pdf) covers this formalization in detail:
+
+```bibtex
+@phdthesis{athalye:thesis,
+  title        = {Formally Verifying Secure and Leakage-Free Systems: From
+                 Application Specification to Circuit-Level Implementation},
+  author       = {Anish Athalye},
+  school       = {Massachusetts Institute of Technology},
+  year         = 2024,
+  month        = aug,
+}
+```
