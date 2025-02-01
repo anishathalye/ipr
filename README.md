@@ -1,4 +1,4 @@
-# IPR [![Build Status](https://github.com/anishathalye/ipr/workflows/CI/badge.svg)](https://github.com/anishathalye/ipr/actions?query=workflow%3ACI)
+# IPR [![Build Status](https://github.com/anishathalye/ipr/actions/workflows/ci.yml/badge.svg)](https://github.com/anishathalye/ipr/actions/workflows/ci.yml)
 
 Theory of information-preserving refinement (IPR) formally verified in Coq.
 
