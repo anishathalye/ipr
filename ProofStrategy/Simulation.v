@@ -5,8 +5,8 @@ Require Import IPR.Emulator.
 Require Import IPR.Machine.
 Require Import IPR.Tactics.
 
-Require Import List.
-Require Import Program.Equality.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Program.Equality.
 
 Section SIMULATION.
 

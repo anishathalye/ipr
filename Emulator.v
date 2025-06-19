@@ -2,8 +2,8 @@ Require Import IPR.Common.
 Require Import IPR.Machine.
 Require Import IPR.Tactics.
 
-Require Import List.
-Require Import Program.Equality.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Program.Equality.
 
 Inductive eproc (S I O : Type) : Type -> Type :=
 | ECall : I -> eproc _ _ _ O

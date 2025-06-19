@@ -2,9 +2,9 @@ Require Import IPR.Common.
 Require Import IPR.Machine.
 Require Import IPR.Tactics.
 
-Require Import List.
-Require Import Logic.FunctionalExtensionality.
-Require Import Program.Equality.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Logic.FunctionalExtensionality.
+From Stdlib Require Import Program.Equality.
 
 Inductive dproc (I O : Type) : Type -> Type :=
 | DCall : I -> dproc _ _ O

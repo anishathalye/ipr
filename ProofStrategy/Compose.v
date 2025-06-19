@@ -6,7 +6,7 @@ Require Import IPR.Machine.
 Require Import IPR.Tactics.
 Require Import IPR.Utils.
 
-Require Import Program.Equality.
+From Stdlib Require Import Program.Equality.
 
 Section COMPOSE.
 

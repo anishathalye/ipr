@@ -14,7 +14,7 @@ jobs:
         with:
           coq_version: latest
           before_script: |
-            sudo chown -R coq:coq .
+            sudo chown -R 1000:1000 .
           script: |
             make -j$(nproc) check
       - name: Revert permissions

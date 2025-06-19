@@ -4,14 +4,14 @@ MAKEFLAGS += -R
 VS := $(shell find . -name '*.v' -not -name '.*')
 
 PROJ_NAME := IPR
-COQ_MAKEFILE := coq_makefile
+ROCQ_MAKEFILE := rocq makefile
 
 .PHONY: check
 check: Makefile.coq
 	$(MAKE) -f $<
 
 Makefile.coq: Makefile $(VS)
-	$(COQ_MAKEFILE) -R . $(PROJ_NAME) $(VS) -o $@
+	$(ROCQ_MAKEFILE) -R . $(PROJ_NAME) $(VS) -o $@
 
 clean: Makefile.coq
 	$(MAKE) -f Makefile.coq clean

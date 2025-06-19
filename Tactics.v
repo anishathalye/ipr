@@ -1,4 +1,4 @@
-Require Import Classes.EquivDec.
+From Stdlib Require Classes.EquivDec.
 
 Ltac sigT_eq :=
   lazymatch goal with

@@ -1,6 +1,6 @@
 Require Import IPR.Common.
 
-Require Import List.
+From Stdlib Require Import Lists.List.
 
 Create HintDb machine.
 

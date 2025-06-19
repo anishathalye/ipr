@@ -6,8 +6,8 @@ Require Import IPR.Machine.
 Require Import IPR.ProofStrategy.Self.
 Require Import IPR.ProofStrategy.Wrap.
 
-Require Import List.
-Require Import Program.Equality.
+From Stdlib Require Import Lists.List.
+From Stdlib Require Import Program.Equality.
 
 Section EQUIVALENT.
 

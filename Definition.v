@@ -3,7 +3,7 @@ Require Import IPR.Driver.
 Require Import IPR.Emulator.
 Require Import IPR.Machine.
 
-Require Import List.
+From Stdlib Require Import Lists.List.
 
 (* 1 is implementation / low level / real
    2 is specification / high level / ideal *)

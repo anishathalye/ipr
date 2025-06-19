@@ -1,6 +1,6 @@
 # IPR [![Build Status](https://github.com/anishathalye/ipr/actions/workflows/ci.yml/badge.svg)](https://github.com/anishathalye/ipr/actions/workflows/ci.yml)
 
-Theory of information-preserving refinement (IPR) formally verified in Coq.
+Theory of information-preserving refinement (IPR) formally verified in Rocq.
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/anishathalye/assets/master/ipr/ipr-definition.png" width="500" alt="The definition of information-preserving refinement">
@@ -10,7 +10,7 @@ IPR relates two state machines with differing interfaces and captures the notion
 
 ## Organization
 
-This repository contains a Coq formalization of the theory of information-preserving refinement (IPR), including a proof of its transitivity, as well as several proof techniques for IPR.
+This repository contains a Rocq formalization of the theory of information-preserving refinement (IPR), including a proof of its transitivity, as well as several proof techniques for IPR.
 
 - `Common.v`, `Tactics.v`: basic definitions and tactics
 - `Machine.v`: state machines, traces, equivalence, and simulation-based proofs
@@ -27,7 +27,7 @@ This repository contains a Coq formalization of the theory of information-preser
 
 ## Dependencies
 
-The code in this repository only depends on the [Coq proof assistant](https://coq.inria.fr/).
+The code in this repository only depends on the [Rocq proof assistant](https://rocq-prover.org/).
 
 ## Building
 
