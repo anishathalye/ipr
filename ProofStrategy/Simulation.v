@@ -49,6 +49,7 @@ Section SIMULATION.
     exists (e : emulator I2 O2 I1 O1),
     forall s1 s2 io s1' s1'',
       R s1 s2 ->
+      io <> nil ->
       execution M1 s1 (io_to_machine_trace io) s1' ->
       M1.(reset) s1' s1'' ->
       exists s2' e2',
@@ -143,7 +144,7 @@ Section SIMULATION.
           -- destruct (Hrst1 s') as (? & Hx).
              assert (execution M1 s1 (IO i1 ol :: nil) s') as Hstep'.
              { inversion H2; subst. eauto with machine. }
-             pose proof (Hsecurity s1 s2 ((i1, ol) :: nil) s' _ HR Hstep' Hx) as H.
+             pose proof (Hsecurity s1 s2 ((i1, ol) :: nil) s' _ HR ltac:(discriminate) Hstep' Hx) as H.
              destruct H as (s2' & e2' & Hexec' & HR').
              exists (EmulatorLow s2' e2').
              split.
@@ -154,7 +155,7 @@ Section SIMULATION.
              ++ intros io s1' s1'' H H0.
                 assert (execution M1 s1 (io_to_machine_trace ((i1, ol) :: io)) s1').
                 { inversion H2; subst. econstructor; eauto. }
-                specialize (Hsecurity s1 s2 ((i1, ol) :: io) s1' _ HR H1 H0).
+                specialize (Hsecurity s1 s2 ((i1, ol) :: io) s1' _ HR ltac:(discriminate) H1 H0).
                 destruct Hsecurity as (s2'' & e2'' & Hexec'' & HR'').
                 inversion Hexec''; clear Hexec''; subst.
                 inversion Hexec'; clear Hexec'; subst.
@@ -232,7 +233,7 @@ Section SIMULATION.
                 simpl; constructor.
                 destruct (Hrst1 s1') as (? & Hx).
                 assert (execution M1 s1 (IO i1 o1' :: nil) s1') as Hstep' by (eauto with machine).
-                specialize (Hsecurity s1 s2 ((i1, o1') :: nil) s1' _ HR Hstep' Hx).
+                specialize (Hsecurity s1 s2 ((i1, o1') :: nil) s1' _ HR ltac:(discriminate) Hstep' Hx).
                 destruct Hsecurity as (s2' & e2' & Hexec' & HR').
                 inversion Hexec'; clear Hexec'; subst.
                 inversion H6; clear H6; subst.
@@ -242,7 +243,7 @@ Section SIMULATION.
                 auto.
              ++ intros io s1'0 s1'' H H0.
                 assert (execution M1 s1 (io_to_machine_trace ((i1, o1') :: io)) s1'0) by (eauto with machine).
-                specialize (Hsecurity s1 s2 ((i1, o1') :: io) _ _ HR H1 H0).
+                specialize (Hsecurity s1 s2 ((i1, o1') :: io) _ _ HR ltac:(discriminate) H1 H0).
                 destruct Hsecurity as (s2' & e2' & Hexec' & HR').
                 inversion Hexec'; clear Hexec'; subst.
                 inversion H8; clear H8; subst.
