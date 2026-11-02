@@ -29,29 +29,29 @@ Section COMPOSE.
       eauto.
     - eexists; split; eauto.
       constructor.
-    - specialize (IHdexec1 _ _ _ _ (fun _ => p) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+    - specialize (IHdexec1 _ _ _ _ (fun _ => p) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec1 as (? & ? & ?); subst.
-      specialize (IHdexec2 _ _ _ _ d23 _ i _ _ eq_refl JMeq_refl JMeq_refl).
+      specialize (IHdexec2 _ _ _ _ d23 _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec2 as (? & ? & ?).
       eexists; split; eauto.
       eauto with driver.
-    - specialize (IHdexec1 _ _ _ _ (fun _ => g) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+    - specialize (IHdexec1 _ _ _ _ (fun _ => g) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec1 as (? & ? & ?); subst.
-      specialize (IHdexec2 _ _ _ _ (fun _ => b) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+      specialize (IHdexec2 _ _ _ _ (fun _ => b) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec2 as (? & ? & ?); subst.
-      specialize (IHdexec3 _ _ _ _ (fun _ => b) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+      specialize (IHdexec3 _ _ _ _ (fun _ => b) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec3 as (? & ? & ?); subst.
       eexists; split; auto.
       eauto with driver.
-    - specialize (IHdexec _ _ _ _ (fun _ => g) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+    - specialize (IHdexec _ _ _ _ (fun _ => g) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec as (? & ? & ?); subst.
       eexists; split; auto.
       eauto with driver.
-    - specialize (IHdexec _ _ _ _ (fun _ => p) _ i _ _ eq_refl JMeq_refl JMeq_refl).
+    - specialize (IHdexec _ _ _ _ (fun _ => p) _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec as (? & ? & ?); subst.
       eexists; split; eauto.
       eauto with driver.
-    - specialize (IHdexec _ _ _ _ (fun _ => p') _ i _ _ eq_refl JMeq_refl JMeq_refl).
+    - specialize (IHdexec _ _ _ _ (fun _ => p') _ _ _ eq_refl JMeq_refl JMeq_refl).
       destruct IHdexec as (? & ? & ?); subst.
       eexists; split; eauto.
       eauto with driver.
@@ -84,7 +84,7 @@ Section COMPOSE.
       eauto with driver.
     - (* inversion is not enough, we need to do induction over the derivation of the execution for the while loop *)
       dependent induction H.
-      + specialize (IHdexec3 _ _ _ i tt _ _ IHd23i1 IHd23i2 _ eq_refl JMeq_refl JMeq_refl).
+      + specialize (IHdexec3 _ _ _ tt _ _ IHd23i1 IHd23i2 _ eq_refl JMeq_refl JMeq_refl).
         specialize (IHd23i1 _ _ _ H).
         specialize (IHd23i2 _ _ _ H0).
         eauto with driver.
@@ -229,21 +229,21 @@ Section COMPOSE.
     - eexists; eexists; repeat split;
         eauto with emulator.
     - destruct s'.
-      destruct (IHeexec1 _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
-      destruct (IHeexec2 _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+      destruct (IHeexec1 _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+      destruct (IHeexec2 _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
       do 2 eexists; repeat split.
       simpl.
       destruct ms, ms'; simpl; subst;
         eauto with emulator.
     - destruct s', s''.
-      destruct (IHeexec1 _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
-      destruct (IHeexec2 _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
-      destruct (IHeexec3 _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+      destruct (IHeexec1 _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+      destruct (IHeexec2 _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+      destruct (IHeexec3 _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
       do 2 eexists; repeat split.
       simpl.
       destruct ms, ms'; simpl; subst;
         eauto with emulator.
-    - destruct (IHeexec _ _ _ _ _ _ i _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
+    - destruct (IHeexec _ _ _ _ _ _ _ _ _ eq_refl JMeq_refl JMeq_refl) as (? & ? & ? & ? & ?).
       do 2 eexists; repeat split.
       simpl.
       destruct ms, ms'; simpl; subst;

@@ -133,14 +133,14 @@ Proof.
   dependent induction H; eauto with emulator.
   - (* bind *)
     destruct s'.
-    specialize (IHeexec1 _ _ _ _ _ es1 eq_refl eq_refl).
-    specialize (IHeexec2 _ _ _ _ _ es1 eq_refl eq_refl).
+    specialize (IHeexec1 _ _ _ _ _ eq_refl eq_refl).
+    specialize (IHeexec2 _ _ _ _ _ eq_refl eq_refl).
     eauto with emulator.
   - (* while *)
     destruct s', s''.
-    specialize (IHeexec1 _ _ _ _ _ es1 eq_refl eq_refl).
-    specialize (IHeexec2 _ _ _ _ _ es1 eq_refl eq_refl).
-    specialize (IHeexec3 _ _ _ _ _ es1 eq_refl eq_refl).
+    specialize (IHeexec1 _ _ _ _ _ eq_refl eq_refl).
+    specialize (IHeexec2 _ _ _ _ _ eq_refl eq_refl).
+    specialize (IHeexec3 _ _ _ _ _ eq_refl eq_refl).
     eauto with emulator.
 Qed.
 
@@ -160,7 +160,7 @@ Proof.
   intros Il Ol I1 O1 S M g b P Hfalse Htrue ms es ms' es' Hexec.
   dependent induction Hexec.
   - destruct s' as (? & ?), s'' as (? & ?).
-    specialize (IHHexec3 _ _ _ Hfalse Htrue _ _ _ _ eq_refl JMeq_refl eq_refl JMeq_refl).
+    specialize (IHHexec3 _ _ Hfalse Htrue _ _ _ _ eq_refl JMeq_refl eq_refl JMeq_refl).
     specialize (Htrue _ _ _ _ _ _ _ _ Hexec1 Hexec2 Hexec3).
     auto.
   - auto.
@@ -302,16 +302,16 @@ Proof.
       econstructor.
     + eapply execution_split in He.
       destruct He as (? & He1 & He2).
-      specialize (IHHi1 _ _ _ eq_refl _ _ He1).
-      specialize (IHHi2 _ _ _ eq_refl _ _ He2).
+      specialize (IHHi1 _ _ eq_refl _ _ He1).
+      specialize (IHHi2 _ _ eq_refl _ _ He2).
       econstructor; eauto.
     + eapply execution_split in He.
       destruct He as (? & He1 & He2).
       eapply execution_split in He2.
       destruct He2 as (? & He2 & He3).
-      specialize (IHHi1 _ _ _ eq_refl _ _ He1).
-      specialize (IHHi2 _ _ _ eq_refl _ _ He2).
-      specialize (IHHi3 _ _ _ eq_refl _ _ He3).
+      specialize (IHHi1 _ _ eq_refl _ _ He1).
+      specialize (IHHi2 _ _ eq_refl _ _ He2).
+      specialize (IHHi3 _ _ eq_refl _ _ He3).
       eapply EexecWhileTrue; eauto.
     + eapply EexecWhileFalse; eauto.
 Qed.

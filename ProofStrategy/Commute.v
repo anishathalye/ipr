@@ -36,24 +36,24 @@ Section COMMUTE.
     - exists ds; split; auto.
       constructor.
     - destruct s'.
-      specialize (IHeexec1 _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H1).
+      specialize (IHeexec1 _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H1).
       destruct IHeexec1 as [ds' [? ?]].
-      specialize (IHeexec2 _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H2).
+      specialize (IHeexec2 _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H2).
       destruct IHeexec2 as [ds'' [? ?]].
       exists ds''.
       split; auto.
       econstructor; eauto.
     - destruct s', s''.
-      specialize (IHeexec1 _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H2).
+      specialize (IHeexec1 _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H2).
       destruct IHeexec1 as [ds' [? ?]].
-      specialize (IHeexec2 _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H3).
+      specialize (IHeexec2 _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H3).
       destruct IHeexec2 as [ds'' [? ?]].
-      specialize (IHeexec3 _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H5).
+      specialize (IHeexec3 _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H5).
       destruct IHeexec3 as [ds''' [? ?]].
       exists ds'''.
       split; auto.
       econstructor; eauto.
-    - specialize (IHeexec _ _ _ _ d23 _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H0).
+    - specialize (IHeexec _ d23 _ _ _ _ _ _ _ eq_refl eq_refl JMeq_refl JMeq_refl JMeq_refl JMeq_refl H0).
       destruct IHeexec as [ds' [? ?]].
       exists ds'.
       split; auto.
